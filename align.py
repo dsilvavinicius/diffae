@@ -20,7 +20,8 @@ def image_align(src_file,
                 face_landmarks,
                 output_size=1024,
                 transform_size=4096,
-                enable_padding=True):
+                enable_padding=True,
+                align_face=True):
     # Align function from FFHQ dataset pre-processing step
     # https://github.com/NVlabs/ffhq-dataset/blob/master/download_ffhq.py
 
@@ -48,6 +49,10 @@ def image_align(src_file,
     # Choose oriented crop rectangle.
     x = eye_to_eye - np.flipud(eye_to_mouth) * [-1, 1]
     x /= np.hypot(*x)
+    
+    if not align_face:
+        x = np.array([1,0], dtype=np.float64)
+    
     x *= max(np.hypot(*eye_to_eye) * 2.0, np.hypot(*eye_to_mouth) * 1.8)
     y = np.flipud(x) * [-1, 1]
     c = eye_avg + eye_to_mouth * 0.1
@@ -114,7 +119,7 @@ def image_align(src_file,
     img = img.transform((transform_size, transform_size), PIL.Image.QUAD,
                         (quad + 0.5).flatten(), PIL.Image.BILINEAR)
     if output_size < transform_size:
-        img = img.resize((output_size, output_size), PIL.Image.ANTIALIAS)
+        img = img.resize((output_size, output_size), PIL.Image.LANCZOS)
 
     # Save aligned image.
     img.save(dst_file, 'PNG')
@@ -152,7 +157,7 @@ def unpack_bz2(src_path):
     return dst_path
 
 
-def work_landmark(raw_img_path, img_name, face_landmarks):
+def work_landmark(raw_img_path, img_name, face_landmarks, no_align):
     face_img_name = '%s.png' % (os.path.splitext(img_name)[0], )
     aligned_face_path = os.path.join(ALIGNED_IMAGES_DIR, face_img_name)
     if os.path.exists(aligned_face_path):
@@ -160,7 +165,8 @@ def work_landmark(raw_img_path, img_name, face_landmarks):
     image_align(raw_img_path,
                 aligned_face_path,
                 face_landmarks,
-                output_size=256)
+                output_size=256,
+                align_face= not no_align)
 
 
 def get_file(src, tgt):
@@ -191,6 +197,9 @@ if __name__ == "__main__":
                         type=str,
                         default="imgs_align",
                         help="output images directory path")
+    parser.add_argument(
+        "--no-align", "-n", action="store_true", help=""
+    )
 
     args = parser.parse_args()
 
@@ -233,7 +242,7 @@ if __name__ == "__main__":
                     # aligned_face_path = os.path.join(ALIGNED_IMAGES_DIR, face_img_name)
                     # image_align(raw_img_path, aligned_face_path, face_landmarks, output_size=256)
 
-                    work_landmark(raw_img_path, img_name, face_landmarks)
+                    work_landmark(raw_img_path, img_name, face_landmarks, args.no_align)
                     progress.update()
 
                     # job = pool.apply_async(

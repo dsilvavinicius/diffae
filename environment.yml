@@ -18,7 +18,6 @@ dependencies:
   - ftfy
   - regex
   - matplotlib
-  #- pillow>=10.0
   - pip
   - pip:
     - pytorch-fid==0.3.0
