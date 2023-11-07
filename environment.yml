@@ -18,6 +18,8 @@ dependencies:
   - ftfy
   - regex
   - matplotlib
+  - imageio
+  - imageio-ffmpeg
   - pip
   - pip:
     - pytorch-fid==0.3.0
