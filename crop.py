@@ -26,8 +26,8 @@ def image_align(src_file,
     img = PIL.Image.open(src_file)
     img = img.convert('RGB')
     center = (img.width // 2, img.height // 2)
-    new_width = img.width * 0.8
-    new_height = img.height * 0.8
+    new_width = img.width * 0.85
+    new_height = img.height * 0.85
 
     img = img.crop((center[0] - new_width // 2, center[1] - new_height // 2, center[0] + new_width // 2, center[1] + new_height // 2))
 

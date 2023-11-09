@@ -15,6 +15,30 @@
                 "-i", "imgs_interpolate/001_002_75-warpings",
                 "-o", "imgs_interpolate/001_002_75-warpings-crop"
             ]
+        },
+        {
+            "name": "Crop 75 imgs tilted",
+            "type": "python",
+            "request": "launch",
+            "program": "crop.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-i", "imgs_interpolate/warp_sandy-frll-002",
+                "-o", "imgs_interpolate/warp_sandy-frll-002-crop"
+            ]
+        },
+        {
+            "name": "Crop diffae tilted",
+            "type": "python",
+            "request": "launch",
+            "program": "crop.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-i", "imgs_interpolate/sandy_dst",
+                "-o", "imgs_interpolate/sandy_dst-crop"
+            ]
         }
     ]
 }
