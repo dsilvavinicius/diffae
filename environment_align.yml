@@ -1,0 +1,15 @@
+name: diffae_align
+channels:
+  - pytorch
+  - conda-forge
+  - anaconda
+dependencies:
+  - scipy>=1.5.4
+  - numpy>=1.19.5
+  - tqdm
+  - matplotlib
+  - dlib
+  - requests
+  - pip
+  - pip:
+    - Pillow

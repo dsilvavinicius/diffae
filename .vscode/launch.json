@@ -5,6 +5,31 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Align",
+            "type": "python",
+            "request": "launch",
+            "program": "align.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-i", "imgs_interpolate/sandy_dst",
+                "-o", "imgs_interpolate/sandy_dst-align"
+            ]
+        },
+        {
+            "name": "Crop DiffAE",
+            "type": "python",
+            "request": "launch",
+            "program": "align.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-i", "imgs_interpolate/sandy_dst",
+                "-o", "imgs_interpolate/sandy_dst-crop-diffae",
+                "-n"
+            ]
+        },
+        {
             "name": "Crop 75 imgs",
             "type": "python",
             "request": "launch",
