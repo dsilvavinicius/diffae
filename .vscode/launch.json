@@ -5,6 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Align flow",
+            "type": "python",
+            "request": "launch",
+            "program": "align.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-i", "imgs_interpolate/profile_flow_new",
+                "-o", "imgs_interpolate/profile_flow_new_aligned"
+            ]
+        },
+        {
             "name": "Align",
             "type": "python",
             "request": "launch",
@@ -63,6 +75,18 @@
             "args": [
                 "-i", "imgs_interpolate/sandy_dst",
                 "-o", "imgs_interpolate/sandy_dst-crop"
+            ]
+        },
+        {
+            "name": "Crop diffae profile",
+            "type": "python",
+            "request": "launch",
+            "program": "crop.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "-i", "imgs_interpolate/profile",
+                "-o", "imgs_interpolate/profile_256"
             ]
         }
     ]
